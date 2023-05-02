@@ -1,14 +1,6 @@
 .all-animals {
   display: flex;
   flex-direction: row;
-
-  .each-animal {
-    display: flex;
-    flex-direction: column;
-  }
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-
-// .animals {
-//   display: flex;
-//   flex-wrap: wrap;
-// }

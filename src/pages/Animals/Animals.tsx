@@ -3,7 +3,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
 import { IAnimal } from "../../models/IAnimal";
 import { Animal } from "../../components/Animal/Animal";
-import { Link } from "react-router-dom";
 import "./Animals.scss";
 
 export const Animals = () => {
@@ -41,13 +40,11 @@ export const Animals = () => {
       <Navbar></Navbar>
       <h1>Här är våra djur!</h1>
 
-      {animalList.map((thisAnimal, index) => (
-        <div className="animals">
-          <Link key={index} to={thisAnimal.id.toString()}>
-            <Animal {...thisAnimal} fullView={false}></Animal>
-          </Link>
-        </div>
-      ))}
+      <div className="all-animals">
+        {animalList.map((thisAnimal, index) => (
+          <Animal {...thisAnimal} fullView={false}></Animal>
+        ))}
+      </div>
     </>
   );
 };

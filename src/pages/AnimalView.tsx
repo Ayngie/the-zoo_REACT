@@ -16,12 +16,12 @@ function AnimalView() {
   );
 
   if (currentAnimal === undefined) {
-    return <h2>Oops, choose an animal!</h2>;
+    return <h2>Oops, välj ett djur!</h2>;
   } else
     return (
       <>
         <Navbar></Navbar>
-        <p>You clicked the animal:</p>
+        <p>Du klickade på:</p>
         <Animal {...currentAnimal} fullView={true}></Animal>
       </>
     );

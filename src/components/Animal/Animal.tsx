@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import { IAnimalFullDescription } from "../../models/IAnimal";
 import "./Animal.scss";
 
 export const Animal = ({
+  id,
   name,
   latinName,
   yearOfBirth,
@@ -19,12 +21,13 @@ export const Animal = ({
         <h1>{name}</h1>
         <img src={imageUrl} alt={shortDescription} />
         <p>{shortDescription}</p>
+        <Link to={id.toString()}>Läs mer!</Link>
       </div>
     );
   } else {
     return (
       <>
-        <div className="animal-container">
+        <div className="each-animal">
           <h1>{name}</h1>
           <img src={imageUrl} alt={shortDescription} />
           <h2>Djur: {latinName}</h2>
