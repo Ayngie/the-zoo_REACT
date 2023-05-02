@@ -1,0 +1,14 @@
+.all-animals {
+  display: flex;
+  flex-direction: row;
+
+  .each-animal {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// .animals {
+//   display: flex;
+//   flex-wrap: wrap;
+// }

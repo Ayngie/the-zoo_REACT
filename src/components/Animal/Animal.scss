@@ -1,0 +1,12 @@
+.animal-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: beige;
+  width: 80%;
+  img {
+    width: 30%;
+  }
+}
