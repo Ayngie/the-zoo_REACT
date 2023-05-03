@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { IAnimalFullDescription } from "../../models/IAnimal";
 import "./Animal.scss";
-import { SyntheticEvent } from "react";
+import { MouseEvent, useState } from "react";
 
 export const Animal = ({
   id,
@@ -26,7 +26,7 @@ export const Animal = ({
           onError={({ currentTarget }) => {
             currentTarget.onerror = null; //prevents looping
             currentTarget.src =
-              "https://raw.githubusercontent.com/Medieinstitutet/the-zoo-Ayngie/main/src/assets/noImage.jpg?token=GHSAT0AAAAAABYW3LZN23ATKZDIU5LPM7J4ZCSIAPA";
+              "https://angelicareutersward.se/Images/noImage/noImage.jpg";
           }}
         />
         <p>{shortDescription}</p>
@@ -44,18 +44,27 @@ export const Animal = ({
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; //prevents looping
               currentTarget.src =
-                "https://raw.githubusercontent.com/Medieinstitutet/the-zoo-Ayngie/main/src/assets/noImage.jpg?token=GHSAT0AAAAAABYW3LZN23ATKZDIU5LPM7J4ZCSIAPA";
+                "https://angelicareutersward.se/Images/noImage/noImage.jpg";
             }}
           />
           <h2>Djur: {latinName}</h2>
           <p>Beskrivning: {longDescription}</p>
           <p>Född: {yearOfBirth}</p>
           <p>Mediciner: {medicine}</p>
-          {/* <p>Är matad? {`${isFed}`}</p> */}
+          <p>Är matad? {`${isFed}`}</p>
           <p>Senast matad: {`${lastFed}`}</p>
         </div>
-        <button>Mata mig!</button>
+        {/* <button onClick={(e) => {feedAnimal(e)}}>Mata djur</button> */}
       </>
     );
   }
 };
+
+// const feedAnimal (e: MouseEvent) {
+//   console.log(e);
+// }
+
+// let todaysDate = new Date();
+// console.log("Todays date:", todaysDate);
+
+// const [feedingTime, setFeedingTime] = useState<Date>();
