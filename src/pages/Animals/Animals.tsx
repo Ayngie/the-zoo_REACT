@@ -42,7 +42,7 @@ export const Animals = () => {
 
       <div className="all-animals">
         {animalList.map((thisAnimal, index) => (
-          <Animal {...thisAnimal} fullView={false}></Animal>
+          <Animal {...thisAnimal} fullView={false} key={index}></Animal>
         ))}
       </div>
     </>

@@ -1,12 +1,6 @@
 .animal-container {
   width: 30%;
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: center;
-  // align-items: center;
-
   background-color: beige;
-  // padding: 10px;
   margin: 10px;
 
   img {
@@ -17,5 +11,16 @@
 .each-animal {
   img {
     width: 50%;
+  }
+  .title-text {
+    font-weight: 630;
+  }
+
+  .is-not-fed {
+    color: red;
+  }
+
+  .is-fed {
+    color: green;
   }
 }

@@ -9,7 +9,7 @@ function AnimalView() {
   const animalList: IAnimal[] = JSON.parse(
     localStorage.getItem("storedList") || "[]"
   );
-  console.log("AnimalList in AnimalView:", animalList);
+  // console.log("AnimalList in AnimalView:", animalList);
 
   const currentAnimal = animalList.find(
     (animal) => animal.id.toString() === params.id
