@@ -10,7 +10,3 @@ export interface IAnimal {
   isFed: boolean;
   lastFed: string;
 }
-
-export interface IAnimalFullDescription extends IAnimal {
-  fullView?: boolean;
-}
