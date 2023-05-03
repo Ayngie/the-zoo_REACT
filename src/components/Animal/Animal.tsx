@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { IAnimalFullDescription } from "../../models/IAnimal";
 import "./Animal.scss";
+import { SyntheticEvent } from "react";
 
 export const Animal = ({
   id,
@@ -19,7 +20,15 @@ export const Animal = ({
     return (
       <div className="animal-container">
         <h1>{name}</h1>
-        <img src={imageUrl} alt={shortDescription} />
+        <img
+          src={imageUrl}
+          alt={latinName}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; //prevents looping
+            currentTarget.src =
+              "https://raw.githubusercontent.com/Medieinstitutet/the-zoo-Ayngie/main/src/assets/noImage.jpg?token=GHSAT0AAAAAABYW3LZN23ATKZDIU5LPM7J4ZCSIAPA";
+          }}
+        />
         <p>{shortDescription}</p>
         <Link to={id.toString()}>Läs mer!</Link>
       </div>
@@ -29,7 +38,15 @@ export const Animal = ({
       <>
         <div className="each-animal">
           <h1>{name}</h1>
-          <img src={imageUrl} alt={shortDescription} />
+          <img
+            src={imageUrl}
+            alt={latinName}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; //prevents looping
+              currentTarget.src =
+                "https://raw.githubusercontent.com/Medieinstitutet/the-zoo-Ayngie/main/src/assets/noImage.jpg?token=GHSAT0AAAAAABYW3LZN23ATKZDIU5LPM7J4ZCSIAPA";
+            }}
+          />
           <h2>Djur: {latinName}</h2>
           <p>Beskrivning: {longDescription}</p>
           <p>Född: {yearOfBirth}</p>
