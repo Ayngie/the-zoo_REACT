@@ -120,7 +120,7 @@ export const Animal = ({
           </p>
           <button
             className={currentAnimal.isFed ? "no-btn-hover" : "btn-hover"}
-            disabled={currentAnimal.isFed} //fixa!
+            disabled={currentAnimal.isFed}
             onClick={() => {
               feedAnimal();
             }}>
