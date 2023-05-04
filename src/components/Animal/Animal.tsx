@@ -1,7 +1,7 @@
 import "./Animal.scss";
 import { IAnimalFullDescription } from "../../models/IAnimalFullDescription";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as luxon from "luxon";
 import { IAnimal } from "../../models/IAnimal";
 
@@ -18,6 +18,28 @@ export const Animal = ({
   lastFed,
   fullView,
 }: IAnimalFullDescription) => {
+  // Kolla om matat djur har blivit hungrigt igen?
+  useEffect(() => {
+    const checkIfHungry = () => {
+      let timePassed: number = 0;
+
+      //beräkna tid som passerat
+      const thisMoment = luxon.DateTime.now();
+
+      console.log("This moment: ", thisMoment);
+
+      if (timePassed > 3) {
+        setCurrentAnimal({ ...currentAnimal, isFed: false }); //Uppdatera objektets state (obs! sker de facto först efter alla funktioner häri kört klart!).
+
+        updateListInLS({ ...currentAnimal, isFed: false });
+        //Skickar med den uppdaterade state-objektet så vi har tillgång till det för att lägga upp i LS i kommande funktion.
+      } else {
+        console.log("Not hungry yet!");
+      }
+    };
+    checkIfHungry();
+  }, []);
+
   // Ta startvärden från props o sätta till en variabel i state:
   const [currentAnimal, setCurrentAnimal] = useState<IAnimal>({
     id,
@@ -32,15 +54,17 @@ export const Animal = ({
     lastFed,
   });
 
+  // Mata djur
   const feedAnimal = () => {
-    const now = luxon.DateTime.now().toString();
-    console.log("Date & time now: ", now);
+    const momentFed = luxon.DateTime.now().toString();
+    console.log("Date & time now: ", momentFed);
 
-    setCurrentAnimal({ ...currentAnimal, isFed: true, lastFed: now }); //Uppdatera mitt state (obs, updateringen sker de facto först efter alla funktioner häri kört klart!).
+    setCurrentAnimal({ ...currentAnimal, isFed: true, lastFed: momentFed }); //Uppdatera mitt state (obs, updateringen sker de facto först efter alla funktioner häri kört klart!).
 
-    updateListInLS({ ...currentAnimal, isFed: true, lastFed: now }); //Skickar med den uppdaterade state-variabeln (det uppdaterade objektet/djuret), vars state annars ju ej blir helt uppdaterat förrän alla funktioner häri kört klart! Men vi kan skicka med värdet så vi har tillgång till det för att lägga upp i LS i kommande funktion.
+    updateListInLS({ ...currentAnimal, isFed: true, lastFed: momentFed }); //Skickar med den uppdaterade state-variabeln (det uppdaterade objektet/djuret), vars state annars ju ej blir helt uppdaterat förrän alla funktioner häri kört klart! Men vi kan skicka med värdet så vi har tillgång till det för att lägga upp i LS i kommande funktion.
   };
 
+  // Uppdatera localStorage
   const updateListInLS = (newAnimal: IAnimal) => {
     // Tagit emot min state-variabel, det uppdaterade objektet/djuret.
     // Nu ska vi hämta listan fr LS, uppdatera ändrade djuret, ladda upp uppdaterade listan i LS:
