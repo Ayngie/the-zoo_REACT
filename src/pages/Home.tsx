@@ -4,11 +4,8 @@ function Home() {
   return (
     <>
       <Navbar></Navbar>
-      <h1>Welcome to Angie's Zoo!</h1>
-      <p>
-        Welcome to the Zoo! Here you can find information about our wonderful
-        zoo animals!
-      </p>
+      <h1>Välkommen till Angie's Zoo!</h1>
+      <p>Här kan du hitta information om alla våra underbara djur!</p>
     </>
   );
 }

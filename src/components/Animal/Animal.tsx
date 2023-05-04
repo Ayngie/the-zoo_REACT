@@ -1,7 +1,7 @@
 import "./Animal.scss";
 import { IAnimalFullDescription } from "../../models/IAnimalFullDescription";
 import { Link } from "react-router-dom";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import * as luxon from "luxon";
 import { IAnimal } from "../../models/IAnimal";
 

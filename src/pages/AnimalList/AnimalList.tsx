@@ -12,11 +12,9 @@ export const Animals = () => {
     const animalListFromLS: IAnimal[] = JSON.parse(
       localStorage.getItem("storedList") || "[]"
     );
-    //fyll på listan från LS:
     if (animalListFromLS.length > 0) {
       setAnimalList(animalListFromLS);
     } else {
-      //fyll på listan från API:
       getAnimals().then((animalsData) => {
         setAnimalList(animalsData);
       });
