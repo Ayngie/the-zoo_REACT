@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import "./main.scss"; //fd. app.css
 import Home from "./pages/Home";
-import { Animals } from "./pages/Animals/Animals";
+import { Animals } from "./pages/AnimalList/AnimalList";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AnimalView from "./pages/AnimalView";
 import ErrorPage from "./pages/Error";

@@ -6,6 +6,13 @@
   img {
     width: 90%;
   }
+
+  .is-not-fed {
+    color: red;
+  }
+  .is-fed {
+    color: green;
+  }
 }
 
 .each-animal {
@@ -16,10 +23,20 @@
     font-weight: 630;
   }
 
+  .btn-hover {
+    &:hover {
+      border-color: rgb(25, 169, 121);
+    }
+  }
+
+  .no-btn-hover {
+    border: none;
+    border-color: none;
+  }
+
   .is-not-fed {
     color: red;
   }
-
   .is-fed {
     color: green;
   }

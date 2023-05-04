@@ -6,12 +6,12 @@ import { Animal } from "../components/Animal/Animal";
 function AnimalView() {
   const params = useParams(); // { id: 123 }
 
-  const animalList: IAnimal[] = JSON.parse(
+  const animalListFromLS: IAnimal[] = JSON.parse(
     localStorage.getItem("storedList") || "[]"
   );
   // console.log("AnimalList in AnimalView:", animalList);
 
-  const currentAnimal = animalList.find(
+  const currentAnimal = animalListFromLS.find(
     (animal) => animal.id.toString() === params.id
   );
 
@@ -21,7 +21,7 @@ function AnimalView() {
     return (
       <>
         <Navbar></Navbar>
-        <p>Du klickade på:</p>
+        <p>Välkommen in till:</p>
         <Animal {...currentAnimal} fullView={true}></Animal>
       </>
     );
