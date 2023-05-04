@@ -20,24 +20,24 @@ export const Animal = ({
 }: IAnimalFullDescription) => {
   // Kolla om matat djur har blivit hungrigt igen?
   useEffect(() => {
-    const checkIfHungry = () => {
-      let timePassed: number = 0;
+    let timePassed: number = 0;
 
-      //beräkna tid som passerat
-      const thisMoment = luxon.DateTime.now();
+    //beräkna tid som passerat
+    const thisMoment = luxon.DateTime.local();
+    const thisMomentFormatted = thisMoment.toFormat("yyyy-MM-dd HH:mm");
+    console.log("Comparison: thisMoment(Formatted): ", thisMomentFormatted);
+    console.log("Comparison: currentAnimal.lastFed: ", currentAnimal.lastFed);
 
-      console.log("This moment: ", thisMoment);
+    //gör beräkning här !!! ???
 
-      if (timePassed > 3) {
-        setCurrentAnimal({ ...currentAnimal, isFed: false }); //Uppdatera objektets state (obs! sker de facto först efter alla funktioner häri kört klart!).
+    if (timePassed > 3) {
+      setCurrentAnimal({ ...currentAnimal, isFed: false }); //Uppdatera objektets state (obs! sker de facto först efter alla funktioner häri kört klart!).
 
-        updateListInLS({ ...currentAnimal, isFed: false });
-        //Skickar med den uppdaterade state-objektet så vi har tillgång till det för att lägga upp i LS i kommande funktion.
-      } else {
-        console.log("Not hungry yet!");
-      }
-    };
-    checkIfHungry();
+      updateListInLS({ ...currentAnimal, isFed: false });
+      //Skickar med den uppdaterade state-objektet så vi har tillgång till det för att lägga upp i LS i kommande funktion.
+    } else {
+      // console.log("Not hungry yet!");
+    }
   }, []);
 
   // Ta startvärden från props o sätta till en variabel i state:
@@ -56,12 +56,23 @@ export const Animal = ({
 
   // Mata djur
   const feedAnimal = () => {
-    const momentFed = luxon.DateTime.now().toString();
-    console.log("Date & time now: ", momentFed);
+    const momentFed = luxon.DateTime.local();
+    console.log("Moment fed: ", momentFed);
 
-    setCurrentAnimal({ ...currentAnimal, isFed: true, lastFed: momentFed }); //Uppdatera mitt state (obs, updateringen sker de facto först efter alla funktioner häri kört klart!).
+    if (momentFed) {
+      const formattedTime = momentFed.toFormat("yyyy-MM-dd HH:mm");
+      setCurrentAnimal({
+        ...currentAnimal,
+        isFed: true,
+        lastFed: formattedTime,
+      }); //Uppdatera mitt state (obs, updateringen sker de facto först efter alla funktioner häri kört klart!).
 
-    updateListInLS({ ...currentAnimal, isFed: true, lastFed: momentFed }); //Skickar med den uppdaterade state-variabeln (det uppdaterade objektet/djuret), vars state annars ju ej blir helt uppdaterat förrän alla funktioner häri kört klart! Men vi kan skicka med värdet så vi har tillgång till det för att lägga upp i LS i kommande funktion.
+      updateListInLS({
+        ...currentAnimal,
+        isFed: true,
+        lastFed: formattedTime,
+      }); //Skickar med den uppdaterade state-variabeln (det uppdaterade objektet/djuret), vars state annars ju ej blir helt uppdaterat förrän alla funktioner häri kört klart! Men vi kan skicka med värdet så vi har tillgång till det för att lägga upp i LS i kommande funktion.
+    }
   };
 
   // Uppdatera localStorage
@@ -140,7 +151,7 @@ export const Animal = ({
 
           <p>
             <span className="title-text">Senast matad: </span>
-            <span> {`${currentAnimal.lastFed}`}</span>
+            <span>{`${currentAnimal.lastFed}`}</span>
           </p>
           <button
             className={currentAnimal.isFed ? "no-btn-hover" : "btn-hover"}
