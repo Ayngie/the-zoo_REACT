@@ -20,7 +20,7 @@ export const Animal = ({
 }: IAnimalFullDescription) => {
   // Kolla om matat djur har blivit hungrigt igen?
   useEffect(() => {
-    let timePassed: number = 0;
+    let threeHoursHavePassed: boolean = false;
 
     //beräkna tid som passerat
     const thisMoment = luxon.DateTime.local();
@@ -28,9 +28,20 @@ export const Animal = ({
     console.log("Comparison: thisMoment(Formatted): ", thisMomentFormatted);
     console.log("Comparison: currentAnimal.lastFed: ", currentAnimal.lastFed);
 
-    //gör beräkning här !!! ???
+    const timeDifference = () => {
+      const lastTime = +thisMomentFormatted;
+      console.log(lastTime);
 
-    if (timePassed > 3) {
+      const thisTime = +currentAnimal.lastFed.toString();
+      console.log(thisTime);
+    };
+    timeDifference();
+
+    //currentAnimal.lastFed.getMilliseconds();
+
+    //threeHoursHavePassed = true;
+
+    if (threeHoursHavePassed) {
       setCurrentAnimal({ ...currentAnimal, isFed: false }); //Uppdatera objektets state (obs! sker de facto först efter alla funktioner häri kört klart!).
 
       updateListInLS({ ...currentAnimal, isFed: false });
@@ -54,13 +65,21 @@ export const Animal = ({
     lastFed,
   });
 
+  // Formatera tid för förra matning:
+  let lastFeedingDate = new Date(currentAnimal.lastFed);
+  console.log("Last logged feeding date (string): ", lastFeedingDate);
+  let [newFeed, setNewFeed] = useState<boolean>(false);
+
   // Mata djur
   const feedAnimal = () => {
     const momentFed = luxon.DateTime.local();
-    console.log("Moment fed: ", momentFed);
+    // console.log("Moment fed: ", momentFed);
 
     if (momentFed) {
+      setNewFeed(true); //för conditional rendering i min return
+
       const formattedTime = momentFed.toFormat("yyyy-MM-dd HH:mm");
+
       setCurrentAnimal({
         ...currentAnimal,
         isFed: true,
@@ -116,6 +135,7 @@ export const Animal = ({
       </div>
     );
   } else {
+    //Show fullView
     return (
       <>
         <div className="each-animal">
@@ -149,10 +169,24 @@ export const Animal = ({
             </span>
           </p>
 
-          <p>
-            <span className="title-text">Senast matad: </span>
-            <span>{`${currentAnimal.lastFed}`}</span>
-          </p>
+          {newFeed ? (
+            <>
+              <p>
+                <span className="title-text">Senast matad: </span>
+                <span>{`${currentAnimal.lastFed}`}</span>
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                <span className="title-text">Senast matad: </span>
+                <span>
+                  {"Datum:"} {lastFeedingDate.toLocaleDateString()},{" Tid:"}
+                  {lastFeedingDate.toLocaleTimeString()}
+                </span>
+              </p>
+            </>
+          )}
           <button
             className={currentAnimal.isFed ? "no-btn-hover" : "btn-hover"}
             disabled={currentAnimal.isFed}
