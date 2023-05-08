@@ -1,6 +1,7 @@
-//-----------  Showing All Zoo Animals  ----------- //
+// --------------------------------- MOBILE FIRST --------------------------------- //
+// -----------  Showing All Zoo Animals  ----------- //
 .animal-container {
-  width: 30%;
+  width: 100%;
   background-color: beige;
   margin: 10px;
 
@@ -41,5 +42,13 @@
   }
   .is-fed {
     color: green;
+  }
+}
+
+// --------------------------------- DESKTOP --------------------------------- //
+
+@media screen and (min-width: 1000px) {
+  .animal-container {
+    width: 30%;
   }
 }
