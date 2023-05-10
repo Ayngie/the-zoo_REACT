@@ -65,7 +65,7 @@ export const Animal = ({
   const feedAnimal = () => {
     const momentFed = luxon.DateTime.local();
     // console.log("Moment fed: ", momentFed);
-    setLastFeedingDate(luxon.DateTime.fromISO(momentFed));
+    setLastFeedingDate(luxon.DateTime.fromISO(momentFed.toString()));
 
     if (momentFed) {
       const formattedTime = momentFed.toFormat("yyyy-MM-dd HH:mm");
