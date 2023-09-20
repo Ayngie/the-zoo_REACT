@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/the-zoo_REACT/",
+  base: "/",
   build: { target: "esnext" },
   plugins: [react()],
 });
